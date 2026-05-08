@@ -1,0 +1,27 @@
+{
+  "name": "LOTTO ORACLE - 19 Methods Prediction",
+  "short_name": "LOTTO ORACLE",
+  "description": "19가지 방법론 앙상블 로또 예상번호 추출 시스템",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080c16",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "entertainment"],
+  "lang": "ko",
+  "dir": "ltr"
+}
