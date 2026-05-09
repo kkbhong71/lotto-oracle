@@ -144,6 +144,61 @@ padding:14px 16px;animation:slideUp .3s ease
 .ib-install{padding:8px 16px;border:none;border-radius:8px;background:var(--gold);color:#000;font-size:12px;font-weight:700;cursor:pointer}
 .ib-close{padding:8px 10px;border:none;border-radius:8px;background:rgba(255,255,255,.08);color:var(--t3);font-size:12px;cursor:pointer}
 
+/* Install Guide Button */
+.install-guide-btn{
+display:inline-flex;align-items:center;gap:5px;
+margin-top:10px;padding:8px 18px;border:1px solid rgba(245,158,11,.4);
+border-radius:20px;background:rgba(245,158,11,.08);
+color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;
+transition:.2s;font-family:'Noto Sans KR',sans-serif
+}
+.install-guide-btn:hover{background:rgba(245,158,11,.15);border-color:var(--gold)}
+.install-guide-btn.installed{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08);color:var(--green);pointer-events:none}
+
+/* Install Modal */
+.modal-overlay{
+display:none;position:fixed;inset:0;z-index:1000;
+background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+align-items:center;justify-content:center;padding:16px
+}
+.modal-overlay.show{display:flex}
+.modal{
+background:var(--bg2);border:1px solid var(--brd);border-radius:16px;
+max-width:420px;width:100%;max-height:85vh;overflow-y:auto;
+padding:24px;position:relative;animation:fi .25s ease
+}
+.modal-close{
+position:absolute;top:12px;right:12px;width:32px;height:32px;
+border:none;border-radius:50%;background:rgba(255,255,255,.06);
+color:var(--t3);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center
+}
+.modal h2{font-size:18px;font-weight:800;margin-bottom:16px;color:var(--gold)}
+.modal .platform-tabs{display:flex;gap:4px;margin-bottom:16px}
+.modal .pt-btn{
+flex:1;padding:10px;border:1px solid var(--brd);border-radius:8px;
+background:var(--bg3);color:var(--t2);font-size:12px;font-weight:700;
+cursor:pointer;text-align:center;transition:.2s;font-family:'Noto Sans KR',sans-serif
+}
+.modal .pt-btn.on{border-color:var(--gold);color:var(--gold);background:rgba(245,158,11,.1)}
+.modal .pt-body{display:none;font-size:13px;line-height:2;color:var(--t2)}
+.modal .pt-body.on{display:block;animation:fi .2s}
+.modal .step{
+display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;
+padding:10px;background:rgba(255,255,255,.03);border-radius:8px
+}
+.modal .step-num{
+min-width:28px;height:28px;border-radius:50%;
+background:var(--gold);color:#000;font-size:13px;font-weight:800;
+display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.modal .step-text{flex:1}
+.modal .step-text strong{color:var(--t1)}
+.modal .visual-hint{
+display:inline-block;padding:3px 10px;border-radius:6px;
+background:rgba(6,182,212,.12);color:var(--cyan);font-size:12px;
+margin:2px 0;font-family:'JetBrains Mono',monospace
+}
+
 /* Data Save Indicator */
 .save-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:10px;font-family:'JetBrains Mono',monospace}
 .save-badge.saved{background:rgba(16,185,129,.1);color:var(--green)}
@@ -156,6 +211,9 @@ padding:14px 16px;animation:slideUp .3s ease
 <div class="hdr">
 <h1>🎱 LOTTO ORACLE</h1>
 <div class="sub">19-Methods Ensemble Prediction System v2.0</div>
+<button class="install-guide-btn" id="install-btn" onclick="openInstallGuide()">
+📲 홈 화면에 앱 설치
+</button>
 <div id="save-status" style="margin-top:6px"></div>
 </div>
 
@@ -242,6 +300,83 @@ padding:14px 16px;animation:slideUp .3s ease
 
 <div class="ftr">
 <span>LOTTO ORACLE v2.0 © 2026 K.G.B. | Oseong Vibe Coding EduHub</span>
+</div>
+
+<!-- Install Guide Modal -->
+<div class="modal-overlay" id="install-modal">
+<div class="modal">
+<button class="modal-close" onclick="closeInstallGuide()">✕</button>
+<h2>📲 앱 설치 방법</h2>
+<div class="platform-tabs">
+<button class="pt-btn on" onclick="showPlatform('ios')">🍎 iPhone</button>
+<button class="pt-btn" onclick="showPlatform('android')">🤖 Android</button>
+<button class="pt-btn" onclick="showPlatform('pc')">💻 PC</button>
+</div>
+
+<div class="pt-body on" id="pt-ios">
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-text"><strong>Safari</strong>로 이 페이지를 열어주세요.<br>
+<span style="font-size:11px;color:var(--rose)">⚠️ 카카오톡/네이버 등 인앱 브라우저에서는 설치 불가!</span></div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-text">하단의 <strong>공유 버튼</strong> <span class="visual-hint">⬆️ (네모에서 화살표)</span> 을 탭하세요.</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-text">메뉴를 스크롤하여 <strong>"홈 화면에 추가"</strong> <span class="visual-hint">➕ 홈 화면에 추가</span> 를 탭하세요.</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-text">오른쪽 상단 <strong>"추가"</strong>를 탭하면 완료!<br>홈 화면에 🎱 아이콘이 생깁니다.</div>
+</div>
+</div>
+
+<div class="pt-body" id="pt-android">
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-text"><strong>Chrome 브라우저</strong>로 이 페이지를 열어주세요.</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-text">주소창 또는 하단에 <strong>"앱 설치"</strong> 배너가 나타나면 탭하세요.<br>
+<span style="font-size:11px;color:var(--t3)">배너가 안 보이면 → 3번으로</span></div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-text">우측 상단 <strong>⋮ 메뉴</strong>를 탭한 후<br>
+<span class="visual-hint">앱 설치</span> 또는 <span class="visual-hint">홈 화면에 추가</span> 를 선택하세요.</div>
+</div>
+<div class="step">
+<div class="step-num">4</div>
+<div class="step-text"><strong>"설치"</strong>를 탭하면 완료!<br>홈 화면에 🎱 아이콘이 생깁니다.</div>
+</div>
+</div>
+
+<div class="pt-body" id="pt-pc">
+<div class="step">
+<div class="step-num">1</div>
+<div class="step-text"><strong>Chrome</strong> 또는 <strong>Edge</strong>로 이 페이지를 열어주세요.</div>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<div class="step-text">주소창 오른쪽에 <span class="visual-hint">⊕ 설치</span> 아이콘이 나타납니다.<br>클릭하면 앱으로 설치됩니다.</div>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<div class="step-text">또는 우측 상단 <strong>⋮ 메뉴 → "앱 설치"</strong>를 클릭하세요.</div>
+</div>
+</div>
+
+<div style="margin-top:16px;padding:12px;background:rgba(245,158,11,.08);border-radius:8px;font-size:11px;color:var(--t2);line-height:1.7">
+💡 <strong>설치하면 좋은 점</strong><br>
+• 홈 화면에서 바로 실행 (URL 입력 불필요)<br>
+• 전체 화면으로 실행 (브라우저 UI 없음)<br>
+• 오프라인에서도 작동<br>
+• 입력한 당첨번호 데이터가 기기에 저장됨
+</div>
+</div>
 </div>
 
 <!-- PWA Install Banner -->
@@ -1238,20 +1373,75 @@ if ('serviceWorker' in navigator) {
 }
 
 // ============================================================
-// PWA: Install Prompt
+// PWA: Install Guide Modal
+// ============================================================
+function openInstallGuide() {
+  // If we have a deferred prompt (Android Chrome), use it directly
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        markInstalled();
+      }
+      deferredPrompt = null;
+    });
+    return;
+  }
+  // Otherwise show the manual guide modal
+  document.getElementById('install-modal').classList.add('show');
+  // Auto-detect platform
+  const ua = navigator.userAgent;
+  if (/iPad|iPhone|iPod/.test(ua)) {
+    showPlatform('ios');
+  } else if (/Android/.test(ua)) {
+    showPlatform('android');
+  } else {
+    showPlatform('pc');
+  }
+}
+
+function closeInstallGuide() {
+  document.getElementById('install-modal').classList.remove('show');
+}
+
+function showPlatform(p) {
+  document.querySelectorAll('.pt-btn').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.pt-body').forEach(b => b.classList.remove('on'));
+  document.getElementById('pt-' + p).classList.add('on');
+  // Find and activate the matching tab button
+  const labels = { ios: '🍎 iPhone', android: '🤖 Android', pc: '💻 PC' };
+  document.querySelectorAll('.pt-btn').forEach(b => {
+    if (b.textContent.trim() === labels[p]) b.classList.add('on');
+  });
+}
+
+// Close modal on overlay click
+document.getElementById('install-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeInstallGuide();
+});
+
+// ============================================================
+// PWA: Install Prompt (Android Chrome)
 // ============================================================
 let deferredPrompt = null;
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  // Show install banner after a short delay
+  // Update button text to indicate direct install is available
+  const btn = document.getElementById('install-btn');
+  if (btn) {
+    btn.innerHTML = '📲 앱 설치하기';
+    btn.style.borderColor = 'rgba(16,185,129,.6)';
+    btn.style.color = '#10b981';
+  }
+  // Also show bottom banner after delay
   setTimeout(() => {
     const banner = document.getElementById('install-banner');
     if (banner && !localStorage.getItem('pwa_install_dismissed')) {
       banner.classList.add('show');
     }
-  }, 3000);
+  }, 5000);
 });
 
 function installPWA() {
@@ -1259,7 +1449,7 @@ function installPWA() {
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(choice => {
     if (choice.outcome === 'accepted') {
-      console.log('PWA installed');
+      markInstalled();
     }
     deferredPrompt = null;
     document.getElementById('install-banner').classList.remove('show');
@@ -1271,9 +1461,22 @@ function dismissInstall() {
   localStorage.setItem('pwa_install_dismissed', 'true');
 }
 
-// Detect standalone mode
-if (window.matchMedia('(display-mode: standalone)').matches) {
+function markInstalled() {
+  const btn = document.getElementById('install-btn');
+  if (btn) {
+    btn.innerHTML = '✅ 설치 완료';
+    btn.classList.add('installed');
+  }
+}
+
+// Detect if already installed (standalone mode)
+if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true) {
   console.log('Running as installed PWA');
+  const btn = document.getElementById('install-btn');
+  if (btn) {
+    btn.innerHTML = '✅ 앱 설치됨';
+    btn.classList.add('installed');
+  }
 }
 </script>
 </body>
